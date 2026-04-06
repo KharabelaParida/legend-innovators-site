@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #F5A623;
+  --color-gold-dark: #C17F24;
+  --color-navy: #1B2A6B;
+  --color-navy-light: #2D3F8F;
+  --color-navy-dark: #111B47;
+  --font-jakarta: var(--font-jakarta);
+  --font-playfair: var(--font-playfair);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #FDF8F3;
+  color: #1B2A6B;
+  font-family: var(--font-jakarta), sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+}
