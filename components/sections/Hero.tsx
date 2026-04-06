@@ -17,7 +17,7 @@ export default function Hero() {
         width: "100%",
         maxWidth: "1280px",
         margin: "0 auto",
-        padding: "0px 80px 0px 80px",
+        padding: "40px 80px 0px 80px",
         display: "flex",
         alignItems: "center",
         gap: "60px",
