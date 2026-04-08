@@ -215,7 +215,7 @@ export default function Footer() {
                     gap: "12px",
                 }}>
                     <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)" }}>
-                        © 2025 Legend Innovators Pvt. Ltd. All rights reserved.
+                        © 2026 Legend Innovators Pvt. Ltd. All rights reserved.
                     </div>
                     <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
                         {["Privacy Policy", "Terms of Service", "Sitemap"].map((item) => (
