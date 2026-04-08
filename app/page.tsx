@@ -13,7 +13,7 @@ export default function Home() {
       <Philosophy />
       <WhyLegend />
       <Testimonials />
-       <CTABanner />
+      <CTABanner />
     </main>
   );
 }
