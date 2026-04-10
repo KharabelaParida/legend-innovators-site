@@ -2,17 +2,18 @@ import Link from "next/link";
 
 export default function CTABanner() {
   return (
-    <section style={{ background: "white", padding: "0 80px 80px 80px" }}>
+    <section className="cta-section">
       <div style={{
         maxWidth: "1280px",
         margin: "0 auto",
         background: "linear-gradient(135deg, #F5A623 0%, #C17F24 100%)",
         borderRadius: "20px",
-        padding: "56px 60px",
         textAlign: "center",
         position: "relative",
         overflow: "hidden",
-      }}>
+      }}
+      className="cta-box"
+      >
 
         {/* Dot pattern overlay */}
         <div style={{
@@ -37,7 +38,7 @@ export default function CTABanner() {
           </p>
 
           <h2 style={{
-            fontSize: "clamp(24px, 3vw, 36px)",
+            fontSize: "clamp(22px, 3vw, 36px)",
             fontWeight: "800",
             color: "white",
             margin: "0 0 12px 0",
@@ -54,12 +55,13 @@ export default function CTABanner() {
             Book your free consultation today. Limited slots available this week.
           </p>
 
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
+          <div className="cta-buttons">
             <Link
               href="/contact"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
+                justifyContent: "center",
                 gap: "8px",
                 background: "white",
                 color: "#C17F24",
@@ -68,7 +70,6 @@ export default function CTABanner() {
                 fontSize: "14px",
                 fontWeight: "800",
                 textDecoration: "none",
-                transition: "all 0.2s",
               }}
             >
               Book Free Consultation →
@@ -78,6 +79,7 @@ export default function CTABanner() {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
+                justifyContent: "center",
                 gap: "8px",
                 background: "transparent",
                 color: "white",
@@ -87,7 +89,6 @@ export default function CTABanner() {
                 fontWeight: "800",
                 textDecoration: "none",
                 border: "2px solid rgba(255,255,255,0.5)",
-                transition: "all 0.2s",
               }}
             >
               Explore Services
@@ -95,6 +96,27 @@ export default function CTABanner() {
           </div>
         </div>
       </div>
+
+      <style>{`
+        .cta-section { background: white; padding: 0 80px 80px 80px; }
+        .cta-box { padding: 56px 60px; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        @media (max-width: 1023px) {
+          .cta-section { padding: 0 16px 40px 16px; }
+          .cta-box { padding: 36px 20px; border-radius: 16px; }
+          .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+          }
+          .cta-buttons a {
+            width: 100%;
+            max-width: 320px;
+          }
+        }
+      `}</style>
+
     </section>
   );
 }

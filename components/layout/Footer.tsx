@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 
 const socials = [
     {
@@ -56,32 +55,159 @@ const socials = [
     },
 ];
 
+const serviceLinks = [
+    { label: "Funding Advisory", href: "/services/funding-advisory" },
+    { label: "Virtual CFO", href: "/services/virtual-cfo" },
+    { label: "Business Advisory", href: "/services/business-advisory" },
+    { label: "Startup Mentoring", href: "/services/startup-mentoring" },
+    { label: "Business Setup", href: "/services/business-establishment" },
+];
+
+const companyLinks = [
+    { label: "About Us", href: "/about" },
+    { label: "LICON Consortium", href: "/licon-consortium" },
+    { label: "Resources", href: "/resources" },
+    { label: "Contact Us", href: "/contact" },
+];
+
+const linkStyle = {
+    fontSize: "13px",
+    color: "rgba(255,255,255,0.5)",
+    textDecoration: "none",
+    display: "block",
+    marginBottom: "10px",
+    transition: "color 0.2s",
+};
+
 export default function Footer() {
     return (
         <footer style={{ background: "#111B47", borderTop: "3px solid #F5A623", width: "100%" }}>
 
-            {/* Main Content */}
-            <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "48px 80px" }}>
-                <div style={{
-                    display: "grid",
-                    gridTemplateColumns: "1.5fr 1fr 1fr 1.2fr",
-                    gap: "40px",
-                    marginBottom: "40px",
-                }}>
+            {/* ── DESKTOP layout ── */}
+            <div className="footer-desktop">
+                <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "48px 80px" }}>
+                    <div style={{
+                        display: "grid",
+                        gridTemplateColumns: "1.5fr 1fr 1fr 1.2fr",
+                        gap: "40px",
+                        marginBottom: "40px",
+                    }}>
+
+                        {/* Brand */}
+                        <div>
+                            <img
+                                src="/logos/logo-web.png"
+                                alt="Legend Innovators"
+                                style={{ width: "auto", height: "61px", marginBottom: "2px", filter: "brightness(0) invert(1)", display: "block", marginLeft: "-20px" }}
+                            />
+                            <div style={{ fontSize: "11px", color: "#F5A623", letterSpacing: "2px", marginBottom: "14px" }}>
+                                innovate. elevate. succeed.
+                            </div>
+                            <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)", lineHeight: "1.7", margin: "0 0 18px 0", maxWidth: "260px" }}>
+                                Empowering Indian startups and SMEs with ethical, sustainable and results-driven advisory.
+                            </p>
+                            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                                {socials.map((social) => (
+                                    <Link
+                                        key={social.name}
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        title={social.name}
+                                        style={{
+                                            width: "36px",
+                                            height: "36px",
+                                            borderRadius: "8px",
+                                            background: "rgba(255,255,255,0.08)",
+                                            border: "1px solid rgba(255,255,255,0.1)",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            color: "rgba(255,255,255,0.6)",
+                                            textDecoration: "none",
+                                        }}
+                                    >
+                                        {social.icon}
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Services */}
+                        <div>
+                            <div style={{ fontSize: "11px", fontWeight: "700", color: "#F5A623", letterSpacing: "2px", marginBottom: "16px" }}>
+                                SERVICES
+                            </div>
+                            {serviceLinks.map((link) => (
+                                <Link key={link.href} href={link.href} style={linkStyle}>
+                                    {link.label}
+                                </Link>
+                            ))}
+                        </div>
+
+                        {/* Company */}
+                        <div>
+                            <div style={{ fontSize: "11px", fontWeight: "700", color: "#F5A623", letterSpacing: "2px", marginBottom: "16px" }}>
+                                COMPANY
+                            </div>
+                            {companyLinks.map((link) => (
+                                <Link key={link.href} href={link.href} style={linkStyle}>
+                                    {link.label}
+                                </Link>
+                            ))}
+                        </div>
+
+                        {/* Contact */}
+                        <div>
+                            <div style={{ fontSize: "11px", fontWeight: "700", color: "#F5A623", letterSpacing: "2px", marginBottom: "16px" }}>
+                                GET IN TOUCH
+                            </div>
+                            {["info@legendinnovators.com", "+91 986-109-8610", "Bhubaneswar, Odisha, India"].map((item) => (
+                                <div key={item} style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", marginBottom: "10px" }}>
+                                    {item}
+                                </div>
+                            ))}
+                            <Link
+                                href="/contact"
+                                style={{
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    gap: "6px",
+                                    background: "linear-gradient(to right, #F5A623, #C17F24)",
+                                    color: "white",
+                                    padding: "10px 20px",
+                                    borderRadius: "999px",
+                                    fontSize: "12px",
+                                    fontWeight: "700",
+                                    textDecoration: "none",
+                                    marginTop: "12px",
+                                }}
+                            >
+                                Book Consultation →
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* ── MOBILE layout ── */}
+            <div className="footer-mobile">
+                <div style={{ padding: "32px 20px 24px" }}>
 
                     {/* Brand */}
-                    <div>
+                    <div style={{ marginBottom: "24px" }}>
                         <img
                             src="/logos/logo-web.png"
                             alt="Legend Innovators"
-                            style={{ width: "auto", height: "61px", marginBottom: "2px", filter: "brightness(0) invert(1)", display: "block", marginLeft: "-20px" }}
+                            style={{ width: "auto", height: "44px", marginBottom: "8px", filter: "brightness(0) invert(1)", display: "block", marginLeft: "-18px" }}
                         />
-                        <div style={{ fontSize: "11px", color: "#F5A623", letterSpacing: "2px", marginBottom: "14px" }}>
+                        <div style={{ fontSize: "10px", color: "#F5A623", letterSpacing: "2px", marginBottom: "10px" }}>
                             innovate. elevate. succeed.
                         </div>
-                        <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)", lineHeight: "1.7", margin: "0 0 18px 0", maxWidth: "260px" }}>
+                        <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)", lineHeight: "1.7", margin: "0 0 16px 0" }}>
                             Empowering Indian startups and SMEs with ethical, sustainable and results-driven advisory.
                         </p>
+                        {/* Social icons in a row */}
                         <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                             {socials.map((social) => (
                                 <Link
@@ -101,17 +227,6 @@ export default function Footer() {
                                         justifyContent: "center",
                                         color: "rgba(255,255,255,0.6)",
                                         textDecoration: "none",
-                                        transition: "all 0.2s",
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        (e.currentTarget as HTMLAnchorElement).style.background = "#F5A623";
-                                        (e.currentTarget as HTMLAnchorElement).style.borderColor = "#F5A623";
-                                        (e.currentTarget as HTMLAnchorElement).style.color = "white";
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.08)";
-                                        (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.1)";
-                                        (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.6)";
                                     }}
                                 >
                                     {social.icon}
@@ -120,91 +235,72 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Services */}
-                    <div>
-                        <div style={{ fontSize: "11px", fontWeight: "700", color: "#F5A623", letterSpacing: "2px", marginBottom: "16px" }}>
-                            SERVICES
+                    {/* Divider */}
+                    <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", marginBottom: "24px" }} />
+
+                    {/* Services + Company in 2 columns */}
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", marginBottom: "24px" }}>
+                        <div>
+                            <div style={{ fontSize: "10px", fontWeight: "700", color: "#F5A623", letterSpacing: "2px", marginBottom: "14px" }}>
+                                SERVICES
+                            </div>
+                            {serviceLinks.map((link) => (
+                                <Link key={link.href} href={link.href} style={{ ...linkStyle, fontSize: "12px" }}>
+                                    {link.label}
+                                </Link>
+                            ))}
                         </div>
-                        {[
-                            { label: "Funding Advisory", href: "/services/funding-advisory" },
-                            { label: "Virtual CFO", href: "/services/virtual-cfo" },
-                            { label: "Business Advisory", href: "/services/business-advisory" },
-                            { label: "Startup Mentoring", href: "/services/startup-mentoring" },
-                            { label: "Business Setup", href: "/services/business-establishment" },
-                        ].map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", textDecoration: "none", display: "block", marginBottom: "10px", transition: "color 0.2s" }}
-                                onMouseEnter={(e) => (e.currentTarget.style.color = "#F5A623")}
-                                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
+                        <div>
+                            <div style={{ fontSize: "10px", fontWeight: "700", color: "#F5A623", letterSpacing: "2px", marginBottom: "14px" }}>
+                                COMPANY
+                            </div>
+                            {companyLinks.map((link) => (
+                                <Link key={link.href} href={link.href} style={{ ...linkStyle, fontSize: "12px" }}>
+                                    {link.label}
+                                </Link>
+                            ))}
+                        </div>
                     </div>
 
-                    {/* Company */}
-                    <div>
-                        <div style={{ fontSize: "11px", fontWeight: "700", color: "#F5A623", letterSpacing: "2px", marginBottom: "16px" }}>
-                            COMPANY
-                        </div>
-                        {[
-                            { label: "About Us", href: "/about" },
-                            { label: "LICON Consortium", href: "/licon-consortium" },
-                            { label: "Resources", href: "/resources" },
-                            { label: "Contact Us", href: "/contact" },
-                        ].map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", textDecoration: "none", display: "block", marginBottom: "10px", transition: "color 0.2s" }}
-                                onMouseEnter={(e) => (e.currentTarget.style.color = "#F5A623")}
-                                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                    </div>
+                    {/* Divider */}
+                    <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", marginBottom: "24px" }} />
 
-                    {/* Contact */}
-                    <div>
-                        <div style={{ fontSize: "11px", fontWeight: "700", color: "#F5A623", letterSpacing: "2px", marginBottom: "16px" }}>
+                    {/* Get in Touch full width */}
+                    <div style={{ marginBottom: "8px" }}>
+                        <div style={{ fontSize: "10px", fontWeight: "700", color: "#F5A623", letterSpacing: "2px", marginBottom: "14px" }}>
                             GET IN TOUCH
                         </div>
-                        {[
-                            "info@legendinnovators.com",
-                            "+91 986-109-8610",
-                            "Bhubaneswar, Odisha, India",
-                        ].map((item) => (
-                            <div key={item} style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", marginBottom: "10px" }}>
+                        {["info@legendinnovators.com", "+91 986-109-8610", "Bhubaneswar, Odisha, India"].map((item) => (
+                            <div key={item} style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", marginBottom: "8px" }}>
                                 {item}
                             </div>
                         ))}
+                        <div style={{ display: "flex", justifyContent: "center" }}></div>
                         <Link
                             href="/contact"
                             style={{
                                 display: "inline-flex",
                                 alignItems: "center",
-                                gap: "6px",
+                                justifyContent: "center",
                                 background: "linear-gradient(to right, #F5A623, #C17F24)",
                                 color: "white",
-                                padding: "10px 20px",
+                                padding: "8px 15px",
                                 borderRadius: "999px",
-                                fontSize: "12px",
+                                fontSize: "13px",
                                 fontWeight: "700",
                                 textDecoration: "none",
-                                marginTop: "12px",
+                                marginTop: "14px",
                             }}
                         >
                             Book Consultation →
                         </Link>
                     </div>
+
                 </div>
             </div>
 
-            {/* Bottom Bar */}
-            <div style={{ background: "rgba(0,0,0,0.2)", padding: "16px 80px" }}>
+            {/* Bottom Bar — shared */}
+            <div className="footer-bottom">
                 <div style={{
                     maxWidth: "1280px",
                     margin: "0 auto",
@@ -212,7 +308,7 @@ export default function Footer() {
                     justifyContent: "space-between",
                     alignItems: "center",
                     flexWrap: "wrap",
-                    gap: "12px",
+                    gap: "8px",
                 }}>
                     <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)" }}>
                         © 2026 Legend Innovators Pvt. Ltd. All rights reserved.
@@ -222,9 +318,7 @@ export default function Footer() {
                             <Link
                                 key={item}
                                 href="#"
-                                style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)", textDecoration: "none", transition: "color 0.2s" }}
-                                onMouseEnter={(e) => (e.currentTarget.style.color = "#F5A623")}
-                                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.3)")}
+                                style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)", textDecoration: "none" }}
                             >
                                 {item}
                             </Link>
@@ -232,6 +326,19 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
+
+            <style>{`
+        .footer-desktop { display: block; }
+        .footer-mobile { display: none; }
+        .footer-bottom { background: rgba(0,0,0,0.2); padding: 16px 80px; }
+
+        @media (max-width: 1023px) {
+          .footer-desktop { display: none; }
+          .footer-mobile { display: block; }
+          .footer-bottom { padding: 16px 20px; }
+          .footer-bottom > div { flex-direction: column; align-items: center; text-align: center; }
+        }
+      `}</style>
 
         </footer>
     );

@@ -18,35 +18,32 @@ const craveValues = [
 ];
 
 export default function PhilosophyPage() {
-    const [activeCrave, setActiveCrave] = useState(0);
     const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-    const [fadeIn, setFadeIn] = useState(true);
+    const [activeCrave, setActiveCrave] = useState(0);
 
-    const handleCraveSwitch = (index: number) => {
-        setFadeIn(false);
-        setTimeout(() => {
-            setActiveCrave(index);
-            setFadeIn(true);
-        }, 200);
-    };
+    const prevCrave = () => setActiveCrave((a) => Math.max(0, a - 1));
+    const nextCrave = () => setActiveCrave((a) => Math.min(craveValues.length - 1, a + 1));
 
     return (
-        <section style={{ background: "white", padding: "40px 80px 60px 80px" }}>
+        <section className="philosophy-section">
 
-            {/* G.I.V.E. Section — Full Navy Block */}
+            {/* ── G.I.V.E Section ── */}
             <div style={{
                 position: "relative",
                 borderRadius: "24px",
                 overflow: "hidden",
                 marginBottom: "80px",
-            }}>
+            }}
+            className="give-margin"
+            >
                 <div style={{
                     background: "#111B47",
                     padding: "56px 64px",
                     position: "relative",
-                }}>
-
-                    {/* Grid pattern overlay */}
+                }}
+                className="give-padding"
+                >
+                    {/* Grid overlay */}
                     <div style={{
                         position: "absolute",
                         inset: 0,
@@ -55,7 +52,7 @@ export default function PhilosophyPage() {
                         pointerEvents: "none",
                     }} />
 
-                    {/* Gold glow top center */}
+                    {/* Gold glow */}
                     <div style={{
                         position: "absolute",
                         top: "-80px",
@@ -67,8 +64,10 @@ export default function PhilosophyPage() {
                         pointerEvents: "none",
                     }} />
 
-                    {/* Header inside navy */}
-                    <div style={{ textAlign: "center", marginBottom: "48px", position: "relative" }}>
+                    {/* Header */}
+                    <div style={{ textAlign: "center", marginBottom: "48px", position: "relative" }}
+                    className="give-header-margin"
+                    >
                         <p style={{
                             fontSize: "11px",
                             fontWeight: "700",
@@ -95,7 +94,9 @@ export default function PhilosophyPage() {
                             maxWidth: "520px",
                             margin: "0 auto",
                             fontStyle: "italic",
-                        }}>
+                        }}
+                        className="give-quote"
+                        >
                             "We don't just advise — we{" "}
                             <span style={{ color: "#F5A623", fontWeight: "700" }}>empower</span>
                             {" "}you to innovate, grow sustainably, and succeed responsibly."
@@ -168,8 +169,10 @@ export default function PhilosophyPage() {
                 </div>
             </div>
 
-            {/* C.R.A.V.E. Section */}
+            {/* ── C.R.A.V.E Section ── */}
             <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+
+                {/* Header */}
                 <div style={{ textAlign: "center", marginBottom: "40px" }}>
                     <p style={{
                         fontSize: "11px",
@@ -192,77 +195,229 @@ export default function PhilosophyPage() {
                     </h3>
                 </div>
 
-                {/* 5 Cards in a row */}
-                <div style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(5, 1fr)",
-                    gap: "0",
-                    border: "1px solid #E5E7EB",
-                    borderRadius: "20px",
-                    overflow: "hidden",
-                }}>
-                    {craveValues.map((item, index) => (
-                        <div
-                            key={index}
-                            onMouseEnter={() => setHoveredCard(index + 10)}
-                            onMouseLeave={() => setHoveredCard(null)}
+                {/* Desktop — 5 columns */}
+                <div className="crave-desktop">
+                    <div style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(5, 1fr)",
+                        gap: "0",
+                        border: "1px solid #E5E7EB",
+                        borderRadius: "20px",
+                        overflow: "hidden",
+                    }}>
+                        {craveValues.map((item, index) => (
+                            <div
+                                key={index}
+                                onMouseEnter={() => setHoveredCard(index + 10)}
+                                onMouseLeave={() => setHoveredCard(null)}
+                                style={{
+                                    padding: "36px 24px",
+                                    textAlign: "center",
+                                    borderRight: index < craveValues.length - 1 ? "1px solid #E5E7EB" : "none",
+                                    background: hoveredCard === index + 10
+                                        ? "#FFF8EC"
+                                        : index % 2 === 0 ? "white" : "#FAFAF8",
+                                    transition: "all 0.3s ease",
+                                    cursor: "default",
+                                }}
+                            >
+                                <div style={{
+                                    fontSize: "52px",
+                                    fontWeight: "900",
+                                    color: "#F5A623",
+                                    lineHeight: "1",
+                                    marginBottom: "16px",
+                                    transition: "transform 0.3s ease",
+                                    transform: hoveredCard === index + 10 ? "scale(1.15)" : "scale(1)",
+                                }}>
+                                    {item.letter}
+                                </div>
+                                <div style={{
+                                    fontSize: "13px",
+                                    fontWeight: "800",
+                                    color: "#1B2A6B",
+                                    marginBottom: "10px",
+                                    fontFamily: "var(--font-playfair)",
+                                }}>
+                                    {item.title}
+                                </div>
+                                <div style={{
+                                    width: hoveredCard === index + 10 ? "40px" : "24px",
+                                    height: "2px",
+                                    background: "linear-gradient(to right, #F5A623, #C17F24)",
+                                    borderRadius: "999px",
+                                    margin: "0 auto 12px auto",
+                                    transition: "width 0.3s ease",
+                                }} />
+                                <div style={{
+                                    fontSize: "11px",
+                                    color: "#6B7280",
+                                    lineHeight: "1.6",
+                                }}>
+                                    {item.desc}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Mobile — carousel */}
+                <div className="crave-mobile">
+
+                    {/* Carousel nav */}
+                    <div style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "12px",
+                        marginBottom: "12px",
+                    }}>
+                        <button
+                            onClick={prevCrave}
+                            disabled={activeCrave === 0}
                             style={{
-                                padding: "36px 24px",
-                                textAlign: "center",
-                                borderRight: index < craveValues.length - 1 ? "1px solid #E5E7EB" : "none",
-                                background: hoveredCard === index + 10
-                                    ? "#FFF8EC"
-                                    : index % 2 === 0 ? "white" : "#FAFAF8",
-                                transition: "all 0.3s ease",
-                                cursor: "default",
+                                width: "36px",
+                                height: "36px",
+                                borderRadius: "50%",
+                                border: "1px solid #E5E7EB",
+                                background: "white",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                cursor: activeCrave === 0 ? "not-allowed" : "pointer",
+                                opacity: activeCrave === 0 ? 0.3 : 1,
+                                flexShrink: 0,
+                                transition: "opacity 0.2s",
                             }}
                         >
-                            {/* Big Letter */}
-                            <div style={{
-                                fontSize: "52px",
-                                fontWeight: "900",
-                                color: "#F5A623",
-                                lineHeight: "1",
-                                marginBottom: "16px",
-                                transition: "transform 0.3s ease",
-                                transform: hoveredCard === index + 10 ? "scale(1.15)" : "scale(1)",
-                            }}>
-                                {item.letter}
-                            </div>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1B2A6B" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
 
-                            {/* Title */}
-                            <div style={{
-                                fontSize: "13px",
-                                fontWeight: "800",
-                                color: "#1B2A6B",
-                                marginBottom: "10px",
-                                fontFamily: "var(--font-playfair)",
-                            }}>
-                                {item.title}
-                            </div>
-
-                            {/* Divider */}
-                            <div style={{
-                                width: hoveredCard === index + 10 ? "40px" : "24px",
-                                height: "2px",
-                                background: "linear-gradient(to right, #F5A623, #C17F24)",
-                                borderRadius: "999px",
-                                margin: "0 auto 12px auto",
-                                transition: "width 0.3s ease",
-                            }} />
-
-                            {/* Description */}
-                            <div style={{
-                                fontSize: "11px",
-                                color: "#6B7280",
-                                lineHeight: "1.6",
-                            }}>
-                                {item.desc}
-                            </div>
+                        <div style={{
+                            flex: 1,
+                            textAlign: "center",
+                            background: "#F5A623",
+                            color: "white",
+                            padding: "10px 20px",
+                            borderRadius: "999px",
+                            fontSize: "13px",
+                            fontWeight: "700",
+                        }}>
+                            {craveValues[activeCrave].title}
                         </div>
-                    ))}
+
+                        <button
+                            onClick={nextCrave}
+                            disabled={activeCrave === craveValues.length - 1}
+                            style={{
+                                width: "36px",
+                                height: "36px",
+                                borderRadius: "50%",
+                                border: "1px solid #E5E7EB",
+                                background: "white",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                cursor: activeCrave === craveValues.length - 1 ? "not-allowed" : "pointer",
+                                opacity: activeCrave === craveValues.length - 1 ? 0.3 : 1,
+                                flexShrink: 0,
+                                transition: "opacity 0.2s",
+                            }}
+                        >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1B2A6B" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {/* Dots */}
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: "6px",
+                        marginBottom: "16px",
+                    }}>
+                        {craveValues.map((_, i) => (
+                            <div
+                                key={i}
+                                onClick={() => setActiveCrave(i)}
+                                style={{
+                                    width: activeCrave === i ? "16px" : "6px",
+                                    height: "6px",
+                                    borderRadius: "3px",
+                                    background: activeCrave === i ? "#F5A623" : "#E5E7EB",
+                                    cursor: "pointer",
+                                    transition: "all 0.2s",
+                                }}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Card */}
+                    <div style={{
+                        background: "#FAFAF8",
+                        borderRadius: "16px",
+                        padding: "28px 20px",
+                        border: "1px solid #E5E7EB",
+                        textAlign: "center",
+                    }}>
+                        <div style={{
+                            fontSize: "52px",
+                            fontWeight: "900",
+                            color: "#F5A623",
+                            lineHeight: "1",
+                            marginBottom: "14px",
+                        }}>
+                            {craveValues[activeCrave].letter}
+                        </div>
+                        <div style={{
+                            fontSize: "16px",
+                            fontWeight: "800",
+                            color: "#1B2A6B",
+                            marginBottom: "10px",
+                            fontFamily: "var(--font-playfair)",
+                        }}>
+                            {craveValues[activeCrave].title}
+                        </div>
+                        <div style={{
+                            width: "28px",
+                            height: "2px",
+                            background: "linear-gradient(to right, #F5A623, #C17F24)",
+                            borderRadius: "999px",
+                            margin: "0 auto 14px",
+                        }} />
+                        <div style={{
+                            fontSize: "13px",
+                            color: "#6B7280",
+                            lineHeight: "1.7",
+                        }}>
+                            {craveValues[activeCrave].desc}
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <style>{`
+                .philosophy-section { background: white; padding: 40px 80px 60px 80px; }
+                .give-margin { margin-bottom: 80px; }
+                .give-padding { padding: 56px 64px; }
+                .give-header-margin { margin-bottom: 48px; }
+                .give-quote { font-size: 15px; }
+                .crave-desktop { display: block; }
+                .crave-mobile { display: none; }
+
+                @media (max-width: 1023px) {
+                    .philosophy-section { padding: 32px 16px 40px 16px; }
+                    .give-margin { margin-bottom: 32px; }
+                    .give-padding { padding: 28px 16px !important; }
+                    .give-header-margin { margin-bottom: 24px !important; }
+                    .give-quote { font-size: 13px !important; }
+                    .crave-desktop { display: none; }
+                    .crave-mobile { display: block; }
+                }
+            `}</style>
 
         </section>
     );

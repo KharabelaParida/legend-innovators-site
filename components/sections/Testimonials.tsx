@@ -94,40 +94,116 @@ export default function Testimonials() {
 
   const t = testimonials[current];
 
-  return (
-    <section style={{ background: "white", padding: "0 80px 80px 80px" }}>
-      <div style={{ maxWidth: "1280px", margin: "0 auto", position: "relative" }}>
+  const Avatar = ({ size }: { size: number }) => (
+    <div style={{
+      width: size,
+      height: size,
+      borderRadius: "50%",
+      border: "2px solid rgba(245,166,35,0.5)",
+      overflow: "hidden",
+      background: "rgba(255,255,255,0.08)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexShrink: 0,
+    }}>
+      {!imgErrors[current] ? (
+        <img
+          src={t.image}
+          alt={t.name}
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          onError={() => setImgErrors((prev) => ({ ...prev, [current]: true }))}
+        />
+      ) : (
+        <div style={{
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(135deg, #F5A623, #C17F24)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: size * 0.3,
+          fontWeight: "900",
+          color: "white",
+        }}>
+          {t.initials}
+        </div>
+      )}
+    </div>
+  );
 
-        {/* Left Arrow */}
-        <button
-          onClick={prev}
+  const NavArrows = ({ color = "white" }: { color?: string }) => (
+    <>
+      <button
+        onClick={prev}
+        style={{
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          border: `1px solid rgba(255,255,255,0.2)`,
+          background: "rgba(255,255,255,0.05)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          flexShrink: 0,
+          transition: "background 0.2s",
+        }}
+      >
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        onClick={next}
+        style={{
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          border: `1px solid rgba(255,255,255,0.2)`,
+          background: "rgba(255,255,255,0.05)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          flexShrink: 0,
+          transition: "background 0.2s",
+        }}
+      >
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </>
+  );
+
+  const Dots = () => (
+    <div style={{ display: "flex", gap: "5px", flex: 1, justifyContent: "center" }}>
+      {testimonials.map((_, index) => (
+        <div
+          key={index}
+          onClick={() => setCurrent(index)}
           style={{
-            position: "absolute",
-            left: "20px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            background: "none",
-            border: "none",
+            height: "6px",
+            borderRadius: "999px",
+            background: current === index ? "#F5A623" : "rgba(255,255,255,0.3)",
+            width: current === index ? "16px" : "6px",
+            transition: "all 0.3s ease",
             cursor: "pointer",
-            color: "#F5A623",
-            fontSize: "48px",
-            fontWeight: "900",
-            lineHeight: "1",
-            padding: "0",
-            zIndex: 10,
-            transition: "opacity 0.2s",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-        >
-          ‹
-        </button>
+        />
+      ))}
+    </div>
+  );
+
+  return (
+    <section className="testimonials-section">
+      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
 
         {/* Main Box */}
         <div style={{
           background: "#1B2A6B",
           borderRadius: "24px",
-          padding: "56px 80px",
           position: "relative",
           overflow: "hidden",
         }}>
@@ -154,7 +230,7 @@ export default function Testimonials() {
           }} />
 
           {/* Header */}
-          <div style={{ textAlign: "center", marginBottom: "36px", position: "relative" }}>
+          <div style={{ textAlign: "center", marginBottom: "28px", position: "relative" }} className="testimonials-header">
             <p style={{
               fontSize: "11px",
               fontWeight: "700",
@@ -166,7 +242,7 @@ export default function Testimonials() {
               What Clients Say
             </p>
             <h3 style={{
-              fontSize: "clamp(22px, 2.5vw, 30px)",
+              fontSize: "clamp(28px, 3.5vw, 42px)",
               fontWeight: "800",
               color: "white",
               margin: 0,
@@ -176,127 +252,112 @@ export default function Testimonials() {
             </h3>
           </div>
 
-          {/* Content */}
-          <div style={{ textAlign: "center", position: "relative", maxWidth: "600px", margin: "0 auto" }}>
-
-            {/* Client Photo */}
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: "24px" }}>
-              <div style={{
-                width: "90px",
-                height: "90px",
-                borderRadius: "50%",
-                border: "3px solid rgba(245,166,35,0.5)",
-                overflow: "hidden",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
-                background: "rgba(255,255,255,0.08)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexShrink: 0,
-              }}>
-                {!imgErrors[current] ? (
-                  <img
-                    src={t.image}
-                    alt={t.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    onError={() => setImgErrors((prev) => ({ ...prev, [current]: true }))}
-                  />
-                ) : (
-                  <div style={{
-                    width: "100%",
-                    height: "100%",
-                    background: "linear-gradient(135deg, #F5A623, #C17F24)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "28px",
-                    fontWeight: "900",
-                    color: "white",
-                  }}>
-                    {t.initials}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Quote */}
-            <p style={{
-              fontSize: "clamp(14px, 1.4vw, 16px)",
-              color: "rgba(255,255,255,0.85)",
-              lineHeight: "1.8",
-              margin: "0 0 24px 0",
-              fontStyle: "italic",
-              minHeight: "80px",
-            }}>
-              {t.quote}
-            </p>
-
-            {/* Gold divider */}
+          {/* ── DESKTOP layout ── */}
+          <div className="testimonials-desktop">
             <div style={{
-              width: "40px",
-              height: "2px",
-              background: "linear-gradient(to right, #F5A623, #C17F24)",
-              borderRadius: "999px",
-              margin: "0 auto 20px auto",
-            }} />
-
-            {/* Name + Role */}
-            <div style={{ marginBottom: "32px" }}>
-              <div style={{ fontSize: "16px", fontWeight: "800", color: "white", marginBottom: "4px" }}>
-                {t.name}
+              display: "flex",
+              alignItems: "center",
+              gap: "40px",
+              position: "relative",
+            }}>
+              {/* Left — avatar + name */}
+              <div style={{
+                flexShrink: 0,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "12px",
+                minWidth: "140px",
+              }}>
+                <Avatar size={80} />
+                <div style={{ fontSize: "15px", fontWeight: "800", color: "white", textAlign: "center" }}>
+                  {t.name}
+                </div>
+                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", textAlign: "center" }}>
+                  {t.designation} · {t.company}
+                </div>
               </div>
-              <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>
-                {t.designation} · {t.company}
+
+              {/* Right — quote + nav */}
+              <div style={{ flex: 1 }}>
+                <p style={{
+                  fontSize: "clamp(13px, 1.2vw, 15px)",
+                  color: "rgba(255,255,255,0.85)",
+                  lineHeight: "1.8",
+                  margin: "0 0 20px 0",
+                  fontStyle: "italic",
+                }}>
+                  "{t.quote}"
+                </p>
+                <div style={{
+                  width: "32px",
+                  height: "2px",
+                  background: "linear-gradient(to right, #F5A623, #C17F24)",
+                  borderRadius: "999px",
+                  marginBottom: "20px",
+                }} />
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <NavArrows />
+                  <Dots />
+                </div>
               </div>
             </div>
-
-            {/* Dots */}
-            <div style={{ display: "flex", justifyContent: "center", gap: "8px" }}>
-              {testimonials.map((_, index) => (
-                <div
-                  key={index}
-                  onClick={() => setCurrent(index)}
-                  style={{
-                    height: "8px",
-                    borderRadius: "999px",
-                    background: current === index ? "#F5A623" : "rgba(255,255,255,0.3)",
-                    width: current === index ? "24px" : "8px",
-                    transition: "all 0.3s ease",
-                    cursor: "pointer",
-                  }}
-                />
-              ))}
-            </div>
-
           </div>
+
+          {/* ── MOBILE layout ── */}
+          <div className="testimonials-mobile">
+            <Avatar size={60} />
+            <p style={{
+              fontSize: "13px",
+              color: "rgba(255,255,255,0.85)",
+              lineHeight: "1.7",
+              margin: "16px 0",
+              fontStyle: "italic",
+              textAlign: "center",
+            }}>
+              "{t.quote}"
+            </p>
+            <div style={{
+              width: "28px",
+              height: "2px",
+              background: "#F5A623",
+              borderRadius: "999px",
+              margin: "0 auto 14px",
+            }} />
+            <div style={{ fontSize: "14px", fontWeight: "800", color: "white", textAlign: "center", marginBottom: "4px" }}>
+              {t.name}
+            </div>
+            <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", textAlign: "center", marginBottom: "20px" }}>
+              {t.designation} · {t.company}
+            </div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px" }}>
+              <NavArrows />
+              <Dots />
+            </div>
+          </div>
+
         </div>
-
-        {/* Right Arrow */}
-        <button
-          onClick={next}
-          style={{
-            position: "absolute",
-            right: "20px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            color: "#F5A623",
-            fontSize: "48px",
-            fontWeight: "900",
-            lineHeight: "1",
-            padding: "0",
-            zIndex: 10,
-            transition: "opacity 0.2s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-        >
-          ›
-        </button>
-
       </div>
+
+      <style>{`
+        .testimonials-section { background: white; padding: 0 80px 80px 80px; }
+        .testimonials-header { padding: 40px 80px 0; }
+        .testimonials-desktop { display: flex; padding: 28px 48px 40px; }
+        .testimonials-mobile { display: none; }
+
+        @media (max-width: 1023px) {
+          .testimonials-section { padding: 0 16px 40px 16px; }
+          .testimonials-header { padding: 24px 16px 0; }
+          .testimonials-desktop { display: none; }
+          .testimonials-mobile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 16px 24px;
+          }
+        }
+      `}</style>
+
     </section>
   );
 }

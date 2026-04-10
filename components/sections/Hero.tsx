@@ -12,7 +12,95 @@ export default function Hero() {
       background: "linear-gradient(135deg, #FDF8F3 60%, #E8F5E9 100%)",
     }}>
 
-      {/* Top Row — Left + Right */}
+      {/* Mobile Image with floating cards — hidden on desktop */}
+      <div className="hero-mobile-image">
+        <div style={{
+          position: "relative",
+          height: "280px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+        }}>
+          {/* Blob */}
+          <svg viewBox="0 0 420 420" style={{
+            position: "absolute",
+            width: "75%",
+            height: "75%",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            zIndex: 0,
+          }}>
+            <defs>
+              <linearGradient id="blobGradMob" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{ stopColor: "#F5A623" }} />
+                <stop offset="100%" style={{ stopColor: "#C17F24" }} />
+              </linearGradient>
+              <pattern id="gridPatternMob" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
+                <line x1="6" y1="0" x2="6" y2="12" stroke="white" strokeWidth="0.6" strokeOpacity="0.25" />
+                <line x1="0" y1="6" x2="12" y2="6" stroke="white" strokeWidth="0.6" strokeOpacity="0.25" />
+              </pattern>
+            </defs>
+            <path
+              d="M180,20 C260,0 370,40 400,130 C430,220 390,340 300,390 C210,440 80,410 30,320 C-20,230 20,100 100,50 C130,30 150,25 180,20Z"
+              fill="url(#blobGradMob)"
+            />
+            <path
+              d="M180,20 C260,0 370,40 400,130 C430,220 390,340 300,390 C210,440 80,410 30,320 C-20,230 20,100 100,50 C130,30 150,25 180,20Z"
+              fill="url(#gridPatternMob)"
+            />
+          </svg>
+
+          {/* Person */}
+          <img
+            src="/hero/hero-person-9.png"
+            alt="Hero Person"
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: "50%",
+              transform: "translateX(-50%)",
+              zIndex: 1,
+              height: "95%",
+              width: "auto",
+              objectFit: "contain",
+            }}
+          />
+
+          {/* Card — top right */}
+          <div style={{ position: "absolute", top: "12%", right: "20%", background: "white", border: "1px solid #E5E7EB", borderRight: "2px solid #F5A623", borderRadius: "5px", padding: "3px 6px", zIndex: 4, boxShadow: "0 2px 6px rgba(0,0,0,0.08)", whiteSpace: "nowrap" }}>
+            <div style={{ fontSize: "10px", fontWeight: 800, color: "#1B2A6B" }}>150+</div>
+            <div style={{ fontSize: "8px", color: "#6B7280" }}>Startups & SMEs</div>
+          </div>
+
+          {/* Card — middle right */}
+          <div style={{ position: "absolute", top: "45%", right: "15%", background: "white", border: "1px solid #E5E7EB", borderRight: "2px solid #F5A623", borderRadius: "5px", padding: "3px 6px", zIndex: 4, boxShadow: "0 2px 6px rgba(0,0,0,0.08)", whiteSpace: "nowrap" }}>
+            <div style={{ fontSize: "10px", fontWeight: 800, color: "#1B2A6B" }}>98%</div>
+            <div style={{ fontSize: "8px", color: "#6B7280" }}>Success Rate</div>
+          </div>
+
+          {/* Card — bottom right */}
+          <div style={{ position: "absolute", bottom: "8%", right: "25%", background: "white", border: "1px solid #E5E7EB", borderRight: "2px solid #F5A623", borderRadius: "5px", padding: "3px 6px", zIndex: 4, boxShadow: "0 2px 6px rgba(0,0,0,0.08)", whiteSpace: "nowrap" }}>
+            <div style={{ fontSize: "10px", fontWeight: 800, color: "#F5A623" }}>Startup India</div>
+            <div style={{ fontSize: "8px", color: "#6B7280" }}>Aligned</div>
+          </div>
+
+          {/* Card — bottom left */}
+          <div style={{ position: "absolute", bottom: "15%", left: "20%", background: "white", border: "1px solid #E5E7EB", borderLeft: "2px solid #F5A623", borderRadius: "5px", padding: "3px 6px", zIndex: 4, boxShadow: "0 2px 6px rgba(0,0,0,0.08)", whiteSpace: "nowrap" }}>
+            <div style={{ fontSize: "10px", fontWeight: 800, color: "#1B2A6B" }}>Pan-India</div>
+            <div style={{ fontSize: "8px", color: "#6B7280" }}>Coverage</div>
+          </div>
+
+          {/* Card — middle left */}
+          <div style={{ position: "absolute", top: "35%", left: "15%", background: "white", border: "1px solid #E5E7EB", borderLeft: "2px solid #F5A623", borderRadius: "5px", padding: "3px 6px", zIndex: 4, boxShadow: "0 2px 6px rgba(0,0,0,0.08)", whiteSpace: "nowrap" }}>
+            <div style={{ fontSize: "10px", fontWeight: 800, color: "#1B2A6B" }}>100%</div>
+            <div style={{ fontSize: "8px", color: "#6B7280" }}>Ethical</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Row — desktop two column / mobile text only */}
       <div style={{
         width: "100%",
         maxWidth: "1280px",
@@ -22,10 +110,12 @@ export default function Hero() {
         alignItems: "center",
         gap: "60px",
         minHeight: "85vh",
-      }}>
+      }}
+      className="hero-layout"
+      >
 
-        {/* Left Side */}
-        <div style={{ flex: "0 0 50%", maxWidth: "50%" }}>
+        {/* Left — Text */}
+        <div style={{ flex: "0 0 50%", maxWidth: "50%" }} className="hero-left">
           <h1 style={{
             fontSize: "clamp(32px, 3vw, 52px)",
             fontWeight: "800",
@@ -53,7 +143,9 @@ export default function Hero() {
             alignItems: "center",
             gap: "12px",
             maxWidth: "460px",
-          }}>
+          }}
+          className="hero-cta"
+          >
             <div style={{
               flex: 1,
               display: "flex",
@@ -101,7 +193,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right Side */}
+        {/* Right — Desktop image + cards */}
         <div style={{
           flex: "0 0 50%",
           maxWidth: "50%",
@@ -110,21 +202,18 @@ export default function Hero() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-        }}>
-
-          {/* Gradient Blob */}
-          <svg
-            viewBox="0 0 420 420"
-            style={{
-              position: "absolute",
-              width: "90%",
-              height: "90%",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: 0,
-            }}
-          >
+        }}
+        className="hero-right"
+        >
+          <svg viewBox="0 0 420 420" style={{
+            position: "absolute",
+            width: "90%",
+            height: "90%",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            zIndex: 0,
+          }}>
             <defs>
               <linearGradient id="blobGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" style={{ stopColor: "#F5A623" }} />
@@ -145,7 +234,6 @@ export default function Hero() {
             />
           </svg>
 
-          {/* Person Image */}
           <img
             src="/hero/hero-person-9.png"
             alt="Hero Person"
@@ -159,55 +247,77 @@ export default function Hero() {
             }}
           />
 
-          {/* Card 1 — 12 o'clock */}
           <div style={{ position: "absolute", top: "2%", left: "70%", transform: "translateX(-50%)", background: "white", border: "1px solid #E5E7EB", borderRight: "3px solid #F5A623", borderRadius: "8px", padding: "8px 14px", zIndex: 4, boxShadow: "0 4px 16px rgba(0,0,0,0.08)", whiteSpace: "nowrap" }}>
             <div style={{ fontSize: "15px", fontWeight: 800, color: "#1B2A6B" }}>150+</div>
             <div style={{ fontSize: "10px", color: "#6B7280" }}>Startups & SMEs</div>
           </div>
-
-          {/* Card 2 — 2 o'clock */}
           <div style={{ position: "absolute", top: "35%", right: "3%", background: "white", border: "1px solid #E5E7EB", borderRight: "3px solid #F5A623", borderRadius: "8px", padding: "8px 14px", zIndex: 4, boxShadow: "0 4px 16px rgba(0,0,0,0.08)", whiteSpace: "nowrap" }}>
             <div style={{ fontSize: "15px", fontWeight: 800, color: "#1B2A6B" }}>98%</div>
             <div style={{ fontSize: "10px", color: "#6B7280" }}>Success Rate</div>
           </div>
-
-          {/* Card 3 — 4 o'clock */}
           <div style={{ position: "absolute", bottom: "15%", right: "8%", background: "white", border: "1px solid #E5E7EB", borderRight: "3px solid #F5A623", borderRadius: "8px", padding: "8px 14px", zIndex: 4, boxShadow: "0 4px 16px rgba(0,0,0,0.08)", whiteSpace: "nowrap" }}>
             <div style={{ fontSize: "15px", fontWeight: 800, color: "#F5A623" }}>Startup India</div>
             <div style={{ fontSize: "10px", color: "#6B7280" }}>Aligned</div>
           </div>
-
-          {/* Card 4 — 8 o'clock */}
           <div style={{ position: "absolute", bottom: "15%", left: "10%", background: "white", border: "1px solid #E5E7EB", borderLeft: "3px solid #F5A623", borderRadius: "8px", padding: "8px 14px", zIndex: 4, boxShadow: "0 4px 16px rgba(0,0,0,0.08)", whiteSpace: "nowrap" }}>
             <div style={{ fontSize: "15px", fontWeight: 800, color: "#1B2A6B" }}>Pan-India</div>
             <div style={{ fontSize: "10px", color: "#6B7280" }}>Coverage</div>
           </div>
-
-          {/* Card 5 — 10 o'clock */}
           <div style={{ position: "absolute", top: "25%", left: "10%", background: "white", border: "1px solid #E5E7EB", borderLeft: "3px solid #F5A623", borderRadius: "8px", padding: "8px 14px", zIndex: 4, boxShadow: "0 4px 16px rgba(0,0,0,0.08)", whiteSpace: "nowrap" }}>
             <div style={{ fontSize: "15px", fontWeight: 800, color: "#1B2A6B" }}>100%</div>
             <div style={{ fontSize: "10px", color: "#6B7280" }}>Ethical</div>
           </div>
-
         </div>
       </div>
 
-      
-    {/* Wave Transition — connects hero to services section */}
-      <div style={{
-        lineHeight: 0,
-      }}>
-        <svg
-          viewBox="0 0 1440 60"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ display: "block", width: "100%" }}
-        >
-          <path
-           d="M0,50 C180,0 360,60 540,20 C720,0 900,60 1080,10 C1260,0 1380,50 1440,30 L1440,60 L0,60 Z"
-            fill="#ffffff"
-          />
+      {/* Wave */}
+      <div style={{ lineHeight: 0 }}>
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", width: "100%" }}>
+          <path d="M0,50 C180,0 360,60 540,20 C720,0 900,60 1080,10 C1260,0 1380,50 1440,30 L1440,60 L0,60 Z" fill="#ffffff" />
         </svg>
       </div>
+
+      <style>{`
+        .hero-mobile-image { display: none; }
+
+        @media (max-width: 1023px) {
+          .hero-mobile-image { display: block; }
+          .hero-layout {
+            flex-direction: column !important;
+            padding: 24px 20px 0px 20px !important;
+            gap: 24px !important;
+            min-height: unset !important;
+          }
+          .hero-left {
+            flex: unset !important;
+            max-width: 100% !important;
+            width: 100% !important;
+          }
+          .hero-left h1 {
+            font-size: 28px !important;
+          }
+          .hero-left p {
+            font-size: 14px !important;
+            max-width: 100% !important;
+            margin-bottom: 24px !important;
+          }
+          .hero-cta {
+            flex-direction: column !important;
+            max-width: 100% !important;
+            gap: 10px !important;
+          }
+          .hero-cta > div {
+            width: 100% !important;
+          }
+          .hero-cta a {
+            width: 100% !important;
+            text-align: center !important;
+            display: flex !important;
+            justify-content: center !important;
+          }
+          .hero-right { display: none !important; }
+        }
+      `}</style>
 
     </section>
   );
